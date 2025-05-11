@@ -1,0 +1,17 @@
+D:\NewSoftTask\Appication\bin\Debug\net8.0\Appication.deps.json
+D:\NewSoftTask\Appication\bin\Debug\net8.0\Appication.dll
+D:\NewSoftTask\Appication\bin\Debug\net8.0\Appication.pdb
+D:\NewSoftTask\Appication\bin\Debug\net8.0\Domain.dll
+D:\NewSoftTask\Appication\bin\Debug\net8.0\Infrastructure.dll
+D:\NewSoftTask\Appication\bin\Debug\net8.0\Infrastructure.pdb
+D:\NewSoftTask\Appication\bin\Debug\net8.0\Domain.pdb
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.csproj.AssemblyReference.cache
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.GeneratedMSBuildEditorConfig.editorconfig
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.AssemblyInfoInputs.cache
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.AssemblyInfo.cs
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.csproj.CoreCompileInputs.cache
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.csproj.Up2Date
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.dll
+D:\NewSoftTask\Appication\obj\Debug\net8.0\refint\Appication.dll
+D:\NewSoftTask\Appication\obj\Debug\net8.0\Appication.pdb
+D:\NewSoftTask\Appication\obj\Debug\net8.0\ref\Appication.dll

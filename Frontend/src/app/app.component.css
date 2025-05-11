@@ -1,0 +1,22 @@
+.toast-success {
+  background-color: #51a351 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.toast-message {
+  white-space: pre-line;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.custom-toast {
+  padding: 15px 20px;
+  min-width: 300px;
+  border-left: 5px solid #28a745;
+}
+
+.custom-message {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  font-size: 15px;
+}

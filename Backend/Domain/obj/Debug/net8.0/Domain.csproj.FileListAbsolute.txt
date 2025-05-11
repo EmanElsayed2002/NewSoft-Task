@@ -1,0 +1,12 @@
+D:\NewSoftTask\Domain\bin\Debug\net8.0\Domain.deps.json
+D:\NewSoftTask\Domain\bin\Debug\net8.0\Domain.dll
+D:\NewSoftTask\Domain\bin\Debug\net8.0\Domain.pdb
+D:\NewSoftTask\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache
+D:\NewSoftTask\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\NewSoftTask\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+D:\NewSoftTask\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+D:\NewSoftTask\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+D:\NewSoftTask\Domain\obj\Debug\net8.0\Domain.dll
+D:\NewSoftTask\Domain\obj\Debug\net8.0\refint\Domain.dll
+D:\NewSoftTask\Domain\obj\Debug\net8.0\Domain.pdb
+D:\NewSoftTask\Domain\obj\Debug\net8.0\ref\Domain.dll
