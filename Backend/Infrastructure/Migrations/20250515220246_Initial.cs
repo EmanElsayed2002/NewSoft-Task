@@ -202,14 +202,12 @@ namespace Infrastructure.Migrations
                 name: "UserSubjects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     SubjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSubjects", x => x.Id);
+                    table.PrimaryKey("PK_UserSubjects", x => new { x.UserId, x.SubjectId });
                     table.ForeignKey(
                         name: "FK_UserSubjects_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -267,11 +265,6 @@ namespace Infrastructure.Migrations
                 name: "IX_UserSubjects_SubjectId",
                 table: "UserSubjects",
                 column: "SubjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserSubjects_UserId",
-                table: "UserSubjects",
-                column: "UserId");
         }
 
         /// <inheritdoc />

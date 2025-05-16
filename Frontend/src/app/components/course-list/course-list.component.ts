@@ -3,6 +3,7 @@ import { StudentService } from '../../Services/student.service';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-list',
@@ -21,7 +22,8 @@ export class CourseListComponent implements OnInit {
     private studentService: StudentService,
     private paginationConfig: NgbPaginationConfig,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toaster: ToastrService
   ) {
     paginationConfig.boundaryLinks = true;
     paginationConfig.rotate = true;
@@ -37,12 +39,16 @@ export class CourseListComponent implements OnInit {
       .getPaginatedCourses(this.page, this.pageSize)
       .subscribe({
         next: (response) => {
-          this.courses = response;
-          this.collectionSize = this.courses.length;
+          console.log(response, this.page, this.pageSize);
+          this.courses = response.subjects;
+          this.collectionSize = response.totalSubjects;
           this.isLoading = false;
         },
         error: (err) => {
-          console.error('Error loading courses:', err);
+          this.toaster.error(
+            'Failed to join the course. Please try again!',
+            'Error'
+          );
           this.isLoading = false;
         },
       });
@@ -54,6 +60,7 @@ export class CourseListComponent implements OnInit {
   }
 
   joinCourse(courseId: number): void {
+    console.log(courseId);
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login'], {
         queryParams: { returnUrl: this.router.url },
@@ -63,12 +70,14 @@ export class CourseListComponent implements OnInit {
 
     this.studentService.joinCourse(courseId).subscribe({
       next: () => {
-        alert('Successfully joined the course!');
+        this.toaster.success('Successfully joined the course!', 'Success 🎉');
         this.loadCourses();
       },
       error: (err) => {
-        console.error('Error joining course:', err);
-        alert('Failed to join the course. Please try again.');
+        this.toaster.error(
+          'Failed to join the course. Please try again!',
+          'Error'
+        );
       },
     });
   }

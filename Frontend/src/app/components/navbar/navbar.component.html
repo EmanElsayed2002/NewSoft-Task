@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Learning Hub</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/"
+            >All Courses</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/my-courses">My Courses</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <button
+          class="btn btn-outline-primary me-2"
+          routerLink="/login"
+          *ngIf="!isLogined"
+        >
+          Login
+        </button>
+        <button
+          class="btn btn-primary"
+          routerLink="/register"
+          *ngIf="!isLogined"
+        >
+          Register
+        </button>
+        <button
+          (click)="loguot()"
+          class="btn btn-primary"
+          routerLink="/login"
+          *ngIf="isLogined"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

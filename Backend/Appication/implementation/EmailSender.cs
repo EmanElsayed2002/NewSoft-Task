@@ -22,13 +22,14 @@ namespace Application.Implementation
                     client.Authenticate(_emailSettings.FromEmail, _emailSettings.Password);
                     var bodybuilder = new BodyBuilder
                     {
-                        HtmlBody = $"{Message}",
+                        HtmlBody = Message,
                         TextBody = "wellcome",
                     };
                     var message = new MimeMessage
                     {
                         Body = bodybuilder.ToMessageBody()
                     };
+
                     message.From.Add(new MailboxAddress("Future Team", _emailSettings.FromEmail));
                     message.To.Add(new MailboxAddress("testing", email));
                     message.Subject = reason == null ? "No Submitted" : reason;

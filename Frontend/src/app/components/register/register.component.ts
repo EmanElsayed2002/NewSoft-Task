@@ -104,10 +104,16 @@ export class RegisterComponent {
         this.submitted = false;
         this.showConfirmationMessage = true;
         this.toaster.success(
-          'Registration successful! Please check your email.'
+          'Registration successful! Please check your email.',
+          'Success 🎉'
         );
+        this.router.navigate(['login']);
       },
       (error) => {
+        this.toaster.error(
+          error.error.message || 'Registration failed. Try again.',
+          'Error ❌'
+        );
         console.error('Registration failed', error.error.message);
       }
     );

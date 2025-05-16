@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250511104940_Initial")]
+    [Migration("20250515220246_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -156,23 +156,15 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Models.UserSubject", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "SubjectId");
 
                     b.HasIndex("SubjectId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserSubjects");
                 });

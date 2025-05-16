@@ -10,7 +10,11 @@ namespace Application.DTOs.User
 
 
 
-
+    public class PAginatedDto
+    {
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+    }
 
 
 

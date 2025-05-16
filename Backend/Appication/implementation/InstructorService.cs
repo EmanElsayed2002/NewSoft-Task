@@ -4,10 +4,11 @@ using Application.DTOs.User;
 using Application.DTOs.User.Application.DTOs.Subject;
 using Domain.Models;
 using Infrastructure.Repos.abstracts;
+using Infrastructure.Repos.Implementation;
 
 namespace Application.Implementation
 {
-    internal class InstructorService : IInstructorService
+    public class InstructorService : IInstructorService
     {
         private readonly IUserRepo _repo;
         private readonly IResponseHandler _handler;
@@ -19,17 +20,7 @@ namespace Application.Implementation
         }
 
         #region Interface Implementation
-        public async Task<ShowSubjectDTO> GetSubjectByIdAsync(int id)
-        {
-            var subject = await _repo.GetSubjectByIdAsync(id);
-            return subject == null ? null : MapToShowSubjectDTO(subject);
-        }
 
-        public async Task<ShowSubjectDTO> GetSubjectByNameAsync(string name)
-        {
-            var subject = await _repo.GetSubjectByNameAsync(name);
-            return subject == null ? null : MapToShowSubjectDTO(subject);
-        }
 
         public IQueryable<ShowSubjectDTO> GetSubjectsQueryable()
         {
@@ -42,10 +33,10 @@ namespace Application.Implementation
             return subject == null ? null : MapToSubjectStudentsDTO(subject);
         }
 
-        public async Task<IEnumerable<ShowSubjectDTO>> GetAllSubjectsAsync()
+        public async Task<GetSubjectsDetails> GetAllSubjectsAsync(int Id, PAginatedDto request)
         {
-            var subjects = await _repo.GetAllSubjectsAsync();
-            return subjects.Select(MapToShowSubjectDTO);
+            var subjects = await _repo.GetAllSubjectsAsync(Id, request.PageSize, request.PageNumber);
+            return subjects;
         }
 
         public async Task AddSubjectAsync(AddCourseDTO subjectDto)
@@ -66,7 +57,7 @@ namespace Application.Implementation
             var subject = await _repo.GetSubjectByIdAsync(removeDto.SubjectId);
             if (subject != null)
             {
-                _repo.RemoveSubject(subject);
+                await _repo.RemoveSubject(subject);
                 await _repo.SaveChangesAsync();
             }
         }
@@ -85,26 +76,7 @@ namespace Application.Implementation
             };
         }
 
-        public async Task<SubjectStudentsDTO> GetUserSubjectAsync(int userId, int subjectId)
-        {
-            var userSubject = await _repo.GetUserSubjectAsync(userId, subjectId);
-            if (userSubject == null) return null;
 
-            return new SubjectStudentsDTO
-            {
-                SubjectId = userSubject.SubjectId,
-                SubjectName = userSubject.Subject.Name,
-                Students = new List<StudentInfoDTO>
-                {
-                    new StudentInfoDTO
-                    {
-                        Id = userSubject.User.Id,
-                        FullName = userSubject.User.FullName,
-                        Email = userSubject.User.Email
-                    }
-                }
-            };
-        }
 
         public async Task AddUserSubjectAsync(AssignStudentDTO assignDto)
         {
@@ -117,15 +89,16 @@ namespace Application.Implementation
             await _repo.SaveChangesAsync();
         }
 
-        public async void RemoveUserSubject(RemoveStudentDTO removeDto)
+        public async Task RemoveUserSubject(RemoveStudentDTO removeDto)
         {
             var userSubject = await _repo.GetUserSubjectAsync(removeDto.StudentId, removeDto.SubjectId);
             if (userSubject != null)
             {
-                _repo.RemoveUserSubject(userSubject);
+                await _repo.RemoveUserSubject(userSubject);
                 await _repo.SaveChangesAsync();
             }
         }
+
 
         public async Task SaveChangesAsync()
         {
@@ -183,19 +156,6 @@ namespace Application.Implementation
             }
         }
 
-        public async Task<Response<IEnumerable<ShowSubjectDTO>>> GetAllSubjects()
-        {
-            try
-            {
-                var subjects = await GetAllSubjectsAsync();
-                return _handler.Success(subjects, "Subjects retrieved successfully");
-            }
-            catch (Exception ex)
-            {
-                return _handler.UnprocessableEntity<IEnumerable<ShowSubjectDTO>>(
-                    $"Error retrieving subjects: {ex.Message}");
-            }
-        }
 
         public async Task<Response<string>> UpdateSubject(UpdateSubjectDTO request)
         {
@@ -364,6 +324,14 @@ namespace Application.Implementation
                     Email = ss.User.Email
                 }).ToList() ?? new List<StudentInfoDTO>()
             };
+        }
+
+
+
+        async Task<Response<IEnumerable<Subject>>> IInstructorService.GetUserSubjectsAsync(int userId)
+        {
+            var res = await _repo.GetUserSubjectsAsync(userId);
+            return _handler.Success(res, "Subjects retrieved successfully");
         }
         #endregion
     }

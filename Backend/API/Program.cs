@@ -119,7 +119,7 @@ namespace API
                  }
              };
          });
-            builder.Services.(); AddAuthorization
+            builder.Services.AddAuthorization();
             builder.Services.AddRateLimiter(RateLimiterOption =>
             {
                 RateLimiterOption.RejectionStatusCode = StatusCodes.Status429TooManyRequests;

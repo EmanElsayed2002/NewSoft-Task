@@ -1,179 +1,134 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header bg-primary text-white text-center">
-          <h3 class="mb-0">User Registration</h3>
+<div class="container my-4">
+  <div class="row justify-content-center align-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0 text-center">Register</h5>
         </div>
         <div class="card-body">
           <form [formGroup]="registrationForm" (ngSubmit)="OnSubmit()">
-            <div class="form-group mb-3">
-              <label for="fullName">Full Name</label>
+            <div class="mb-2">
               <input
                 type="text"
-                id="fullName"
                 formControlName="FullName"
-                class="form-control mt-2"
+                class="form-control form-control-sm"
+                placeholder="Full Name"
               />
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   registrationForm.controls['FullName'].touched &&
                   registrationForm.controls['FullName'].invalid
                 "
               >
-                <span
-                  *ngIf="registrationForm.controls['FullName'].errors?.['required']"
-                  >Full Name is Required.
-                </span>
-                <span
-                  *ngIf="registrationForm.controls['FullName'].errors?.['minlength']"
-                  >Full name must be at least 3 characters long.
-                </span>
-              </div>
+                {{registrationForm.controls['FullName'].errors?.['required'] ? 'Required' : 'Min 3 characters'}}
+              </small>
             </div>
 
-            <div class="form-group mb-3">
-              <label for="address">Address</label>
+            <!-- Address -->
+            <div class="mb-2">
               <input
                 type="text"
-                id="address"
                 formControlName="Address"
-                class="form-control mt-2"
+                class="form-control form-control-sm"
+                placeholder="Address"
               />
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   registrationForm.controls['Address'].touched &&
                   registrationForm.controls['Address'].invalid
                 "
               >
-                <span
-                  *ngIf="registrationForm.controls['Address'].errors?.['required']"
-                  >Address is Required.
-                </span>
-                <span
-                  *ngIf="registrationForm.controls['Address'].errors?.['minlength']"
-                  >Address must be at least 5 characters long.
-                </span>
-              </div>
+                {{registrationForm.controls['Address'].errors?.['required'] ? 'Required' : 'Min 5 characters'}}
+              </small>
             </div>
 
-            <div class="form-group mb-3">
-              <label for="email">Email</label>
+            <!-- Email -->
+            <div class="mb-2">
               <input
                 type="email"
-                id="email"
                 formControlName="Email"
-                class="form-control mt-2"
+                class="form-control form-control-sm"
+                placeholder="Email"
               />
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   registrationForm.controls['Email'].touched &&
                   registrationForm.controls['Email'].invalid
                 "
               >
-                <span
-                  *ngIf="registrationForm.controls['Email'].errors?.['required']"
-                  >Email is Required.
-                </span>
-                <span
-                  *ngIf="registrationForm.controls['Email'].errors?.['pattern']"
-                  >Please provide a valid email address.
-                </span>
-              </div>
+                {{registrationForm.controls['Email'].errors?.['required'] ? 'Required' : 'Invalid email'}}
+              </small>
             </div>
 
-            <div class="form-group mb-3">
-              <label for="phone">Phone</label>
+            <!-- Phone -->
+            <div class="mb-2">
               <input
                 type="tel"
-                id="phone"
                 formControlName="Phone"
-                class="form-control mt-2"
-                placeholder="+1234567890"
+                class="form-control form-control-sm"
+                placeholder="Phone"
               />
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   registrationForm.controls['Phone'].touched &&
                   registrationForm.controls['Phone'].invalid
                 "
               >
-                <span
-                  *ngIf="registrationForm.controls['Phone'].errors?.['required']"
-                  >Phone is Required.
-                </span>
-                <span
-                  *ngIf="registrationForm.controls['Phone'].errors?.['pattern']"
-                  >Please provide a valid phone number (8-15 digits).
-                </span>
-              </div>
+                {{registrationForm.controls['Phone'].errors?.['required'] ? 'Required' : 'Invalid phone number'}}
+              </small>
             </div>
 
-            <div class="form-group mb-3">
-              <label for="age">Age</label>
+            <!-- Age -->
+            <div class="mb-2">
               <input
                 type="number"
-                id="age"
                 formControlName="Age"
-                class="form-control mt-2"
+                class="form-control form-control-sm"
+                placeholder="Age"
               />
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   registrationForm.controls['Age'].touched &&
                   registrationForm.controls['Age'].invalid
                 "
               >
-                <span
-                  *ngIf="registrationForm.controls['Age'].errors?.['required']"
-                  >Age is Required.
-                </span>
-                <span *ngIf="registrationForm.controls['Age'].errors?.['min']"
-                  >Age must be greater than 10.
-                </span>
-              </div>
+                {{registrationForm.controls['Age'].errors?.['required'] ? 'Required' : 'Must be above 10'}}
+              </small>
             </div>
 
-            <div class="form-group mb-3">
-              <label for="password">Password</label>
+            <!-- Password -->
+            <div class="mb-2">
               <input
                 type="password"
-                id="password"
                 formControlName="Password"
-                class="form-control mt-2"
+                class="form-control form-control-sm"
+                placeholder="Password"
               />
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   registrationForm.controls['Password'].touched &&
                   registrationForm.controls['Password'].invalid
                 "
               >
-                <span
-                  *ngIf="registrationForm.controls['Password'].errors?.['required']"
-                  >Password is Required.
-                </span>
-                <span
-                  *ngIf="registrationForm.controls['Password'].errors?.['pattern']"
-                  >Password must be at least 8 characters long and contain at
-                  least one uppercase letter, one lowercase letter, one number,
-                  and one special character.
-                </span>
-              </div>
+                {{registrationForm.controls['Password'].errors?.['required'] ? 'Required' : 'Invalid format'}}
+              </small>
             </div>
 
-            <div class="form-group mb-3">
-              <label for="confirmedPassword">Confirm Password</label>
+            <!-- Confirm Password -->
+            <div class="mb-2">
               <input
                 type="password"
-                id="confirmedPassword"
                 formControlName="ConfirmedPassword"
-                class="form-control mt-2"
+                class="form-control form-control-sm"
+                placeholder="Confirm Password"
               />
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   (registrationForm.controls['ConfirmedPassword'].touched ||
@@ -182,53 +137,46 @@
                     registrationForm.hasError('passwordMismatch'))
                 "
               >
-                <span
-                  *ngIf="
-                    registrationForm.controls['ConfirmedPassword'].hasError(
-                      'required'
-                    )
-                  "
-                >
-                  Please confirm your password.
-                </span>
-                <span *ngIf="registrationForm.hasError('passwordMismatch')">
-                  Passwords do not match.
-                </span>
-              </div>
+                {{
+                  registrationForm.controls["ConfirmedPassword"].hasError(
+                    "required"
+                  )
+                    ? "Required"
+                    : "Passwords do not match"
+                }}
+              </small>
             </div>
 
-            <div class="form-group mb-3">
-              <label for="role">Role</label>
-              <select id="role" formControlName="Role" class="form-select mt-2">
-                <option value="">Select a role</option>
+            <!-- Role -->
+            <div class="mb-3">
+              <select formControlName="Role" class="form-select form-select-sm">
+                <option value="" disabled selected>Select Role</option>
                 <option value="Student">Student</option>
                 <option value="Instructor">Instructor</option>
               </select>
-              <div
+              <small
                 class="text-danger"
                 *ngIf="
                   registrationForm.controls['Role'].touched &&
                   registrationForm.controls['Role'].invalid
                 "
               >
-                <span
-                  *ngIf="registrationForm.controls['Role'].errors?.['required']"
-                  >Please select a role.
-                </span>
-              </div>
+                Please select a role
+              </small>
             </div>
 
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+            <!-- Buttons -->
+            <div class="d-flex gap-2">
               <button
                 type="submit"
-                class="btn btn-primary"
+                class="btn btn-primary btn-sm flex-grow-1"
                 [disabled]="registrationForm.invalid || submitted"
               >
                 Register
               </button>
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-outline-secondary btn-sm"
                 (click)="onReset()"
               >
                 Reset

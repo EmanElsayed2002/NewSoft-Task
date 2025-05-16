@@ -24,7 +24,7 @@ export class ConfirmEmailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      const token = params['token'];
+      const token = params['code'];
       const id = params['userId'];
       if (token) {
         this.verifyEmailWithToken(token, id);
@@ -39,8 +39,9 @@ export class ConfirmEmailComponent implements OnInit {
     this.confirmationStatus = 'loading';
     const confirmData: IConfirmEmail = {
       UserId: id,
-      Token: token,
+      Code: token,
     };
+    console.log(confirmData.Code, confirmData.UserId);
     this.authService.ConfirmationEmail(confirmData).subscribe({
       next: (response) => {
         this.confirmationStatus = 'success';

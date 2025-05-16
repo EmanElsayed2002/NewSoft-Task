@@ -211,23 +211,21 @@ namespace Application.Implementation
                 var confirmationUrl = $"{origin}/confirm-email?userId={user.Id}&code={Uri.EscapeDataString(code)}";
 
                 var message = $"""
-    Hello {user.FullName},
-    
-    Please confirm your email by clicking this link:
-    <{confirmationUrl}>
-    
-    Or copy and paste this URL into your browser:
-    {confirmationUrl}
-    
-    If you didn't request this, please ignore this email.
-    
-    Thanks,
-    Your App Team
-    """;
-
+                <html>
+                <body>
+                    <p>Hello {user.FullName},</p>
+                    <p>Please confirm your email by clicking the link below:</p>
+                    <p><a href="{confirmationUrl}" target="_blank" style="color: #1a73e8;">Confirm Email</a></p>
+                    <p>Or copy and paste this URL into your browser:</p>
+                    <p>{confirmationUrl}</p>
+                    <p>If you didn't request this, please ignore this email.</p>
+                    <p>Thanks,<br/>Your App Team</p>
+                </body>
+                </html>
+                """;
 
                 await _emailSender.SendEmail(
-                   user.Email, "Confirm your email", message
+                    user.Email, message, "Confirm your email"
                 );
             }
             catch (Exception ex)
@@ -236,6 +234,7 @@ namespace Application.Implementation
                 throw;
             }
         }
+
 
         private async Task SendPasswordResetEmail(User user, string code)
         {

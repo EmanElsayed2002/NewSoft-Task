@@ -15,22 +15,29 @@ export class StudentService {
     pageSize: number = 10
   ): Observable<any> {
     const params = new HttpParams()
-      .set('page', page.toString())
+      .set('pageNumber', page.toString())
       .set('pageSize', pageSize.toString());
 
-    return this.http.get(`${this.apiUrl}/instructor/get-all-subjects`, {
+    return this.http.get(`${this.apiUrl}/User/get-all-subjects`, {
       params,
     });
   }
 
   joinCourse(courseId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/instructor/add-user-subject`, {
+    return this.http.post(`${this.apiUrl}/User/Student/add-user-subject`, {
       subjectId: courseId,
-      userId: this.getCurrentUserId(),
     });
   }
-
+  getUserSubjects() {
+    return this.http.get(`${this.apiUrl}/User/Students/Subjects
+`);
+  }
   private getCurrentUserId(): number {
     return 1;
+  }
+  removeCourse(courseId: number) {
+    return this.http.delete(
+      `${this.apiUrl}/User/Student/remove-student-subject/${courseId}`
+    );
   }
 }

@@ -5,6 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repos.Implementation
 {
+    public class GetSubjectsDetails
+    {
+        public List<Subject> Subjects { get; set; } = new List<Subject>();
+        public int TotalSubjects { get; set; }
+    }
     public class UserRepo : GenericRepo<User>, IUserRepo
     {
         private readonly AppDbContext _context;
@@ -42,11 +47,36 @@ namespace Infrastructure.Repos.Implementation
                 .FirstOrDefaultAsync(s => s.Id == subjectId);
         }
 
-        public async Task<IEnumerable<Subject>> GetAllSubjectsAsync()
+        public async Task<GetSubjectsDetails> GetAllSubjectsAsync(int studentId, int pageSize, int pageNumber)
         {
-            return await _context.Subjects
-                .Include(s => s.studentSubjects)
-                .ToListAsync();
+            try
+            {
+                if (studentId <= 0) throw new ArgumentException("Invalid student ID", nameof(studentId));
+                if (pageSize <= 0) pageSize = 10;
+                if (pageNumber <= 0) pageNumber = 1;
+
+                var query = _context.Subjects
+                    .Where(s => !s.studentSubjects.Any(ss => ss.UserId == studentId));
+
+                var subjects = await query
+                    .OrderBy(s => s.Id)
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                var totalSubjects = await query.CountAsync();
+
+                return new GetSubjectsDetails
+                {
+                    Subjects = subjects,
+                    TotalSubjects = totalSubjects
+                };
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError(ex, "Error fetching subjects for studentId {StudentId}", studentId);
+                throw;
+            }
         }
 
         public async Task AddSubjectAsync(Subject subject)
@@ -59,7 +89,7 @@ namespace Infrastructure.Repos.Implementation
             _context.Subjects.Update(subject);
         }
 
-        public void RemoveSubject(Subject subject)
+        public async Task RemoveSubject(Subject subject)
         {
             _context.Subjects.Remove(subject);
         }
@@ -74,13 +104,26 @@ namespace Infrastructure.Repos.Implementation
             return await _context.UserSubjects
                 .FirstOrDefaultAsync(us => us.UserId == userId && us.SubjectId == subjectId);
         }
+        private async Task<int> TotalCourses()
+        {
+            return await _context.Subjects.CountAsync();
+        }
+        public async Task<IEnumerable<Subject>> GetUserSubjectsAsync(int userId)
+        {
 
+            return await _context.UserSubjects
+                .Where(us => us.UserId == userId)
+                .Include(us => us.Subject)
+                .OrderBy(us => us.Subject.Id)
+                .Select(us => us.Subject)
+                .ToListAsync();
+        }
         public async Task AddUserSubjectAsync(UserSubject userSubject)
         {
             await _context.UserSubjects.AddAsync(userSubject);
         }
 
-        public void RemoveUserSubject(UserSubject userSubject)
+        public async Task RemoveUserSubject(UserSubject userSubject)
         {
             _context.UserSubjects.Remove(userSubject);
         }

@@ -3,34 +3,13 @@
     "ContainingType": "API.Controllers.AuthenticationController",
     "Method": "ConfirmEmailAsync",
     "RelativePath": "api/Authentication/confirm-email",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "UserId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Code",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.AuthenticationController",
-    "Method": "ForgotPassword",
-    "RelativePath": "api/Authentication/forgot-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "NewSoftTask.Application.DTOs.Authentication.ForgetPasswordRequest",
+        "Type": "NewSoftTask.Application.DTOs.Authentication.ConfirmEmailRequest",
         "IsRequired": true
       }
     ],
@@ -85,25 +64,56 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Controllers.AuthenticationController",
-    "Method": "ResetPassword",
-    "RelativePath": "api/Authentication/reset-password",
-    "HttpMethod": "POST",
+    "ContainingType": "API.Controllers.UserController",
+    "Method": "GetAllSubjects",
+    "RelativePath": "api/User/get-all-subjects",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "NewSoftTask.Application.DTOs.Authentication._ResetPasswordRequest",
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.UserController",
+    "Method": "GetSubjectWithStudents",
+    "RelativePath": "api/User/get-subject-with-students/{subjectId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subjectId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Controllers.InstructorController",
+    "ContainingType": "API.Controllers.UserController",
+    "Method": "GetSubjectsQueryable",
+    "RelativePath": "api/User/get-subjects-queryable",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.UserController",
     "Method": "AddSubject",
-    "RelativePath": "api/Instructor/add-subject",
+    "RelativePath": "api/User/Instructor/add-subject",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -117,9 +127,41 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Controllers.InstructorController",
+    "ContainingType": "API.Controllers.UserController",
+    "Method": "RemoveSubject",
+    "RelativePath": "api/User/Instructor/remove-subject/{SubjectId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subjectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.UserController",
+    "Method": "UpdateSubject",
+    "RelativePath": "api/User/Instructor/update-subject",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.DTOs.User.Application.DTOs.Subject.UpdateSubjectDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.UserController",
     "Method": "AddUserSubject",
-    "RelativePath": "api/Instructor/add-user-subject",
+    "RelativePath": "api/User/Student/add-user-subject",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -133,156 +175,29 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "GetAllSubjects",
-    "RelativePath": "api/Instructor/get-all-subjects",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "GetSubjectByName",
-    "RelativePath": "api/Instructor/get-subject-by-name/{name}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "name",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "GetSubjectWithStudents",
-    "RelativePath": "api/Instructor/get-subject-with-students/{subjectId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "subjectId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "GetSubjectById",
-    "RelativePath": "api/Instructor/get-subject/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "GetSubjectsQueryable",
-    "RelativePath": "api/Instructor/get-subjects-queryable",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "GetUserSubject",
-    "RelativePath": "api/Instructor/get-user-subject",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "subjectId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "GetUserById",
-    "RelativePath": "api/Instructor/get-user/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "RemoveSubject",
-    "RelativePath": "api/Instructor/remove-subject",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Application.DTOs.User.Application.DTOs.Subject.RemoveStudentDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.InstructorController",
+    "ContainingType": "API.Controllers.UserController",
     "Method": "RemoveUserSubject",
-    "RelativePath": "api/Instructor/remove-user-subject",
+    "RelativePath": "api/User/Student/remove-student-subject/{subjectId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "Application.DTOs.User.Application.DTOs.Subject.RemoveStudentDTO",
+        "Name": "subjectId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Controllers.InstructorController",
-    "Method": "UpdateSubject",
-    "RelativePath": "api/Instructor/update-subject",
-    "HttpMethod": "PUT",
+    "ContainingType": "API.Controllers.UserController",
+    "Method": "GetUserSubjects",
+    "RelativePath": "api/User/Students/Subjects",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "Application.DTOs.User.Application.DTOs.Subject.UpdateSubjectDTO",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

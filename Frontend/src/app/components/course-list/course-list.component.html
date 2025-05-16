@@ -22,17 +22,16 @@
       </div>
     </div>
 
-    <div
-      class="d-flex justify-content-center mt-4"
-      *ngIf="collectionSize > pageSize"
-    >
-      <!-- <ngb-pagination
-        [collectionSize]="collectionSize"
-        [(page)]="page"
-        [pageSize]="pageSize"
-        (pageChange)="onPageChange($event)"
-      >
-      </ngb-pagination> -->
+    <div class="d-flex justify-content-center mt-4">
+      <div>
+        <ngb-pagination
+          [collectionSize]="collectionSize"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)"
+        >
+        </ngb-pagination>
+      </div>
     </div>
   </div>
 </div>

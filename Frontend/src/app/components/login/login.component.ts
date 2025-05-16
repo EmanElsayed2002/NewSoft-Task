@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toaster: ToastrService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -53,6 +55,7 @@ export class LoginComponent {
         console.log(response);
         this.isLoading = false;
         if (response) {
+          this.toaster.success('Login successful!', 'Success 🎉');
           this.router.navigateByUrl(this.returnUrl);
         }
       });
